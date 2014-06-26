@@ -27,8 +27,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box = "yungsang/coreos"
 
 
-  # Use docker-tcp.socket to expose the port 4243
-  #config.vm.network "forwarded_port", guest: 4243, host: 4243
+  # expose Redis port
+  config.vm.network "forwarded_port", guest: 6379, host: 6379
 
 
   # shared folder via NFS;

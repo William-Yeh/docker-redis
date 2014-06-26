@@ -5,7 +5,7 @@ Docker-Redis
 
 Repository name in Docker Hub: **[williamyeh/docker-redis](https://registry.hub.docker.com/u/williamyeh/docker-redis/)**
 
-This repository contains **Dockerfile** of [Redis](http://redis.io/) for [Docker](http://www.docker.com/)'s [trusted build](https://registry.hub.docker.com/u/williamyeh/docker-redis/) published to the public [Docker Hub](https://hub.docker.com/).
+This repository contains **Dockerfile** of [Redis](http://redis.io/) for [Docker](http://www.docker.com/)'s [automated build](https://registry.hub.docker.com/u/williamyeh/docker-redis/) published to the public [Docker Hub](https://hub.docker.com/).
 
 
 
@@ -26,6 +26,8 @@ This docker image contains the following software stack:
 
 
 ### History
+
+- 0.2 - Add more convenient wrappers (`usage.sh`, `start.sh`, `client.sh`).
 
 - 0.1 - This repository was forked from [dockerfile/redis](https://github.com/dockerfile/redis). 
 
@@ -50,7 +52,7 @@ If you're using a Docker-friendly OS (e.g., CoreOS, Debian, Ubuntu) or Windows/M
 
 1. Install [Docker](http://www.docker.com/), if necessary.
 
-2. Download this [trusted build](https://registry.hub.docker.com/u/williamyeh/docker-redis/) from public [Docker Hub](https://registry.hub.docker.com/):
+2. Download this [automated build](https://registry.hub.docker.com/u/williamyeh/docker-redis/) from public [Docker Hub](https://registry.hub.docker.com/):
 
    ```
    $ docker pull williamyeh/docker-redis
@@ -120,26 +122,8 @@ Vagrant 1.6 has also introduced Docker-related commands (e.g., `docker-logs` & `
 ## Usage
 
 
-#### Run `redis-server`
+#### Show usage
 
 ```
-$ docker run -d --name redis -p 6379:6379 williamyeh/docker-redis
-```
-
-#### Run `redis-server` with persistent data directory. (creates `dump.rdb`)
-
-```
-$ docker run -d -p 6379:6379 -v <data-dir>:/data --name redis williamyeh/docker-redis
-```
-
-#### Run `redis-server` with persistent data directory and password.
-
-```
-$ docker run -d -p 6379:6379 -v <data-dir>:/data --name redis williamyeh/docker-redis redis-server /etc/redis/redis.conf --requirepass <password>
-```
-
-#### Run `redis-cli`
-
-```
-$ docker run -it --rm --link redis:redis williamyeh/docker-redis bash -c 'redis-cli -h $REDIS_PORT_6379_TCP_ADDR'
+$ docker run --rm williamyeh/docker-redis
 ```
