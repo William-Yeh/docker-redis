@@ -11,35 +11,28 @@
 FROM debian:jessie
 MAINTAINER William Yeh <william.pjyeh@gmail.com>
 
-ENV DEBIAN_FRONTEND noninteractive
 ENV TARBALL http://download.redis.io/redis-stable.tar.gz
 
 # not absolutely necessary, but make Unix maintenance easier...
-RUN apt-get update  &&  apt-get install -y procps
+RUN DEBIAN_FRONTEND=noninteractive \
+    apt-get update  &&  apt-get install -y procps
 
 
-# Install curl & compilation tools
-RUN apt-get install -y \
-      curl \
-      make \
-      gcc
-
-
-# Install Redis.
-RUN \
-  cd /tmp && \
-  curl -O $TARBALL && \
-  tar xvzf redis-stable.tar.gz && \
-  cd redis-stable && \
-  make && \
-  make install && \
-  cp -f src/redis-sentinel /usr/local/bin && \
-  mkdir -p /etc/redis && \
-  cp -f *.conf /etc/redis && \
-  rm -rf /tmp/redis-stable*
-
-# Uninstall curl & compilation tools
-RUN apt-get remove -y --auto-remove curl make gcc && \
+RUN DEBIAN_FRONTEND=noninteractive \
+    apt-get install -y  curl make gcc  && \
+    \
+    cd /tmp  && \
+    curl -O $TARBALL  && \
+    tar xvzf redis-stable.tar.gz  && \
+    cd redis-stable  && \
+    make  && \
+    make install  && \
+    cp -f src/redis-sentinel /usr/local/bin  && \
+    mkdir -p /etc/redis  && \
+    cp -f *.conf /etc/redis  && \
+    rm -rf /tmp/redis-stable*  && \
+    \
+    apt-get remove -y --auto-remove curl make gcc  && \
     apt-get clean
 
 
@@ -61,9 +54,9 @@ EXPOSE 6379
 
 # for convenience
 ENV PATH /opt:$PATH
-ADD usage.sh   /opt/
-ADD start.sh   /opt/
-ADD client.sh  /opt/
+COPY usage.sh   /opt/
+COPY start.sh   /opt/
+COPY client.sh  /opt/
 RUN date '+%Y-%m-%dT%H:%M:%S%:z' > /var/log/DOCKER_BUILD_TIME
 
 

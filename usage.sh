@@ -6,7 +6,7 @@ TIMESTAMP=`cat /var/log/DOCKER_BUILD_TIME`
 
 cat << EOF
 
-williamyeh/docker-redis - Docker image for Redis.
+williamyeh/redis - Docker image for Redis.
 Image built at: $TIMESTAMP
 
 Env
@@ -33,34 +33,34 @@ Usage
     # start Redis server sliently with default configuration;
     # useful when '--link'ed with other containers
     $ docker run -d  --name redis  \\
-        williamyeh/docker-redis  start.sh
+        williamyeh/redis  start.sh
 
 
     # start Redis server with public accessible TCP port
     $ docker run -d  --name redis  \\
         -p 6379:6379               \\
-        williamyeh/docker-redis  start.sh
+        williamyeh/redis  start.sh
 
 
     # start Redis server with customized "redis.conf" from host OS
     $ docker run -d  --name redis            \\
         -p 6379:6379                         \\
         -v /myproject/conf/redis:/etc/redis  \\
-        williamyeh/docker-redis  start.sh
+        williamyeh/redis  start.sh
 
 
     # start Redis server with customized conf file from host OS
     $ docker run -d  --name redis            \\
         -p 6379:6379                         \\
         -v /myproject/conf/redis:/etc/redis  \\
-        williamyeh/docker-redis  start.sh  redis-cluster.conf
+        williamyeh/redis  start.sh  redis-cluster.conf
 
 
     # start Redis server, with persistent data directory (creates dump.rdb)
     $ docker run -d  --name redis  \\
         -p 6379:6379               \\
         -v /myproject/data:/data   \\
-        williamyeh/docker-redis  start.sh
+        williamyeh/redis  start.sh
 
 
 ## Connecting to existing Redis container
@@ -68,14 +68,14 @@ Usage
     # connect to Redis server named "redis"
     $ docker run -it --rm        \\
         --link redis:redis       \\
-        williamyeh/docker-redis  client.sh
+        williamyeh/redis  client.sh
 
 
     # connect to Redis server named "mycache";
     # give it an alias "redis".
     $ docker run -it --rm        \\
         --link mycache:redis     \\
-        williamyeh/docker-redis  client.sh
+        williamyeh/redis  client.sh
 
 
 
@@ -101,7 +101,7 @@ They all reside in "/usr/local/bin" directory.
 
     # start redis-server with password
     $ docker run -d  --name redis  \\
-        williamyeh/docker-redis    \\
+        williamyeh/redis           \\
         redis-server  /etc/redis/redis.conf  --requirepass <password>
 
 
@@ -109,7 +109,7 @@ They all reside in "/usr/local/bin" directory.
 
     $ docker run -it --rm        \\
         --link redis:redis       \\
-        williamyeh/docker-redis  \\
+        williamyeh/redis         \\
         bash -c 'redis-cli -h \$REDIS_PORT_6379_TCP_ADDR'
 
 
