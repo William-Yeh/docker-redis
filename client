@@ -1,8 +1,8 @@
 #!/bin/bash
 #
-# simple wrapper of "redis-cli"
+# Simple wrapper for "redis-cli" executable.
 #
-# Usage:  client.sh  [redis-server-container-alias-name]
+# Usage:  client  [redis-server-container-alias-name]
 #
 # Arguments:
 #   - redis-server-container-alias-name: default="REDIS"
@@ -17,11 +17,9 @@ ENV_SERVER_IP='$'$NAME'_PORT_6379_TCP_ADDR'
 #echo $ENV_SERVER_IP
 eval IP=$ENV_SERVER_IP
 
-
 ENV_SERVER_PORT='$'$NAME'_PORT_6379_TCP_PORT'
 #echo $ENV_SERVER_PORT
 eval PORT=$ENV_SERVER_PORT
-
 
 if [ -z "$IP" ]; then
     echo "Error: $ENV_SERVER_IP is empty"
@@ -32,4 +30,5 @@ elif [ -z "$PORT" ]; then
 fi
 
 
+# finally, actual work here!
 redis-cli  -h $IP  -p $PORT

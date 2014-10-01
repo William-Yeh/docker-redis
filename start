@@ -1,8 +1,8 @@
 #!/bin/bash
 #
-# simple wrapper of redis-server
+# Simple wrapper for "redis-server" executable.
 #
-# Usage:  start.sh  [config-filename]
+# Usage:  start  [config-filename]
 #
 # Arguments:
 #   - config-filename: default="redis.conf"

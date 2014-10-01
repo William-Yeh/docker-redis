@@ -25,7 +25,9 @@ This docker image contains the following software stack:
 
 ### History
 
-- 0.2 - Add more convenient wrappers (`usage.sh`, `start.sh`, `client.sh`).
+- 0.3 - Add more convenient wrapper (`benchmark`).
+
+- 0.2 - Add more convenient wrappers (`usage.sh`, `start`, `client`).
 
 - 0.1 - This repository was forked from [dockerfile/redis](https://github.com/dockerfile/redis). 
 
@@ -41,6 +43,13 @@ In the beginning I used the [dockerfile/redis](https://github.com/dockerfile/red
 - *Unnecessary dependencies* - It installed, at the very beginning of [its parent's Dockerfile](https://github.com/dockerfile/ubuntu/blob/master/Dockerfile), the [software-properties-common](https://packages.debian.org/sid/admin/software-properties-common) package, which in turns installed some Python3 packages.  I prefered to incorporate these stuff only when absolutely needed.
 
 Therefore, I built this Docker image on my own, also as an exercise.
+
+In addition, I add several convenient wrappers for Redis executables.
+
+
+## Good alternatives
+
+Now Docker official image [`redis`](https://registry.hub.docker.com/_/redis/) has smaller image size and good version management. You may try it, instead.
 
 
 

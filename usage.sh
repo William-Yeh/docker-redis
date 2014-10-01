@@ -24,7 +24,7 @@ Usage
 
 ## Starting a Redis server with my simple wrapper
 
-  Cmd:  start.sh  [config-file]
+  Cmd:  start  [config-file]
   Args:
     - config-file: default = redis.conf
 
@@ -33,49 +33,64 @@ Usage
     # start Redis server sliently with default configuration;
     # useful when '--link'ed with other containers
     $ docker run -d  --name redis  \\
-        williamyeh/redis  start.sh
+        williamyeh/redis  start
 
 
     # start Redis server with public accessible TCP port
     $ docker run -d  --name redis  \\
         -p 6379:6379               \\
-        williamyeh/redis  start.sh
+        williamyeh/redis  start
 
 
     # start Redis server with customized "redis.conf" from host OS
     $ docker run -d  --name redis            \\
         -p 6379:6379                         \\
         -v /myproject/conf/redis:/etc/redis  \\
-        williamyeh/redis  start.sh
+        williamyeh/redis  start
 
 
-    # start Redis server with customized conf file from host OS
+    # start Redis server with customized conf filename from host OS
     $ docker run -d  --name redis            \\
         -p 6379:6379                         \\
         -v /myproject/conf/redis:/etc/redis  \\
-        williamyeh/redis  start.sh  redis-cluster.conf
+        williamyeh/redis  start  redis-cluster.conf
 
 
     # start Redis server, with persistent data directory (creates dump.rdb)
     $ docker run -d  --name redis  \\
         -p 6379:6379               \\
         -v /myproject/data:/data   \\
-        williamyeh/redis  start.sh
+        williamyeh/redis  start
 
 
-## Connecting to existing Redis container
+## Connecting to existing Redis container with my simple wrapper
 
     # connect to Redis server named "redis"
     $ docker run -it --rm        \\
         --link redis:redis       \\
-        williamyeh/redis  client.sh
+        williamyeh/redis  client
 
 
-    # connect to Redis server named "mycache";
-    # give it an alias "redis".
+    # connect to an already-running Redis server named "mycache";
+    # then give it an alias "redis" for client to refer to.
     $ docker run -it --rm        \\
         --link mycache:redis     \\
-        williamyeh/redis  client.sh
+        williamyeh/redis  client
+
+
+## Benchmarking an existing Redis container with my simple wrapper
+
+    # connect to Redis server named "redis"
+    $ docker run --rm            \\
+        --link redis:redis       \\
+        williamyeh/redis  benchmark
+
+
+    # connect to an already-running Redis server named "mycache";
+    # then give it an alias "redis" for bechmark client to refer to.
+    $ docker run --rm            \\
+        --link mycache:redis     \\
+        williamyeh/redis  benchmark
 
 
 

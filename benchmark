@@ -1,0 +1,36 @@
+#!/bin/bash
+#
+# Simple wrapper for "redis-benchmark" executable.
+#
+# Usage:  benchmark  [arguments]
+#
+# Arguments:
+#   - all arguments supported by redis-benchmark, excluding '-h' and '-p'.
+#
+# Expection:
+#   - link with an already-running Redis server
+#     with container name (or alias) = "redis".
+#
+
+NAME=REDIS
+
+
+ENV_SERVER_IP='$'$NAME'_PORT_6379_TCP_ADDR'
+#echo $ENV_SERVER_IP
+eval IP=$ENV_SERVER_IP
+
+ENV_SERVER_PORT='$'$NAME'_PORT_6379_TCP_PORT'
+#echo $ENV_SERVER_PORT
+eval PORT=$ENV_SERVER_PORT
+
+if [ -z "$IP" ]; then
+    echo "Error: $ENV_SERVER_IP is empty"
+    exit
+elif [ -z "$PORT" ]; then
+    echo "Error: $ENV_SERVER_PORT is empty"
+    exit
+fi
+
+
+# finally, actual work here!
+redis-benchmark  -h $IP  -p $PORT  "$@"
