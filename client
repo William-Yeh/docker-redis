@@ -2,15 +2,17 @@
 #
 # Simple wrapper for "redis-cli" executable.
 #
-# Usage:  client  [redis-server-container-alias-name]
+# Usage:  client  [arguments]
 #
 # Arguments:
-#   - redis-server-container-alias-name: default="REDIS"
+#   - all arguments supported by redis-cli, excluding '-h' and '-p'.
+#
+# Expection:
+#   - link with an already-running Redis server
+#     with container name (or alias) = "redis".
 #
 
-ARG_SERVER_ALIAS=${1:-REDIS}
-NAME=${ARG_SERVER_ALIAS^^}   # to uppercase
-#echo $NAME
+NAME=REDIS
 
 
 ENV_SERVER_IP='$'$NAME'_PORT_6379_TCP_ADDR'
@@ -31,4 +33,4 @@ fi
 
 
 # finally, actual work here!
-redis-cli  -h $IP  -p $PORT
+redis-cli  -h $IP  -p $PORT  "$@"

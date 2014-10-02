@@ -28,7 +28,7 @@ RUN DEBIAN_FRONTEND=noninteractive \
     \
     echo "==> Download, compile, and install..."  && \
     cd /tmp  && \
-    curl -O $TARBALL  && \
+    curl -LO $TARBALL  && \
     tar xvzf redis-stable.tar.gz  && \
     cd redis-stable  && \
     make  && \

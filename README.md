@@ -25,6 +25,8 @@ This docker image contains the following software stack:
 
 ### History
 
+- 0.4 - Make `client` more flexible.
+
 - 0.3 - Add more convenient wrapper (`benchmark`).
 
 - 0.2 - Add more convenient wrappers (`usage.sh`, `start`, `client`).

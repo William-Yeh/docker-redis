@@ -78,6 +78,13 @@ Usage
         williamyeh/redis  client
 
 
+    # connect to Redis server named "redis";
+    # then issue commands via redis-cli.
+    $ docker run -it --rm        \\
+        --link redis:redis       \\
+        williamyeh/redis  client  info
+
+
 ## Benchmarking an existing Redis container with my simple wrapper
 
     # connect to Redis server named "redis"
