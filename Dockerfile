@@ -4,7 +4,7 @@
 #
 # Reference:  https://github.com/dockerfile/redis
 #
-# Version     0.3
+# Version     0.4
 #
 
 # pull base image
@@ -14,16 +14,11 @@ MAINTAINER William Yeh <william.pjyeh@gmail.com>
 ENV TARBALL http://download.redis.io/redis-stable.tar.gz
 
 
-RUN DEBIAN_FRONTEND=noninteractive \
-    apt-get update  && \
-    \
-    \
-    echo "==> not absolutely necessary, but make Unix maintenance easier..."  && \
-    apt-get install -y procps  && \
-    \
+RUN apt-get update  && \
     \
     echo "==> Install curl and helper tools..."  && \
-    apt-get install -y  curl make gcc  && \
+    DEBIAN_FRONTEND=noninteractive  apt-get install -y  curl make gcc  && \
+    \
     \
     \
     echo "==> Download, compile, and install..."  && \
