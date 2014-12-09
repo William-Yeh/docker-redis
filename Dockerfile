@@ -46,7 +46,8 @@ RUN apt-get update  && \
     \
     echo "==> Clean up..."  && \
     apt-get remove -y --auto-remove curl make gcc  && \
-    apt-get clean
+    apt-get clean  && \
+    rm -rf /var/lib/apt/lists/*
 
 
 # configure Redis

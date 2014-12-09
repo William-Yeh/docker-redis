@@ -10,4 +10,4 @@
 
 CONF=${1:-redis.conf}
 
-redis-server  /etc/redis/$CONF
+exec  redis-server  /etc/redis/$CONF

@@ -33,4 +33,4 @@ fi
 
 
 # finally, actual work here!
-redis-cli  -h $IP  -p $PORT  "$@"
+exec  redis-cli  -h $IP  -p $PORT  "$@"
