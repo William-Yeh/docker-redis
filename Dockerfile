@@ -11,7 +11,8 @@
 FROM debian:jessie
 MAINTAINER William Yeh <william.pjyeh@gmail.com>
 
-ENV TARBALL http://download.redis.io/redis-stable.tar.gz
+ENV VER     2.8.19
+ENV TARBALL http://download.redis.io/releases/redis-$VER.tar.gz
 
 
 RUN apt-get update  && \
@@ -23,9 +24,9 @@ RUN apt-get update  && \
     \
     echo "==> Download, compile, and install..."  && \
     cd /tmp  && \
-    curl -LO $TARBALL  && \
-    tar xvzf redis-stable.tar.gz  && \
-    cd redis-stable  && \
+    curl -L $TARBALL -o redis.tar.gz && \
+    tar xvzf redis.tar.gz  && \
+    cd redis-$VER  && \
     make  && \
     make install  && \
     \
@@ -34,7 +35,7 @@ RUN apt-get update  && \
     cp -f src/redis-sentinel /usr/local/bin  && \
     mkdir -p /etc/redis  && \
     cp -f *.conf /etc/redis  && \
-    rm -rf /tmp/redis-stable*  && \
+    rm -rf /tmp/redis*  && \
     \
     \
     echo "==> Configure for Dockerized version of Redis..."  && \
